@@ -4,3 +4,4 @@ auto/
 *.fls
 *.log
 *.synctex.gz
+*region*.tex
