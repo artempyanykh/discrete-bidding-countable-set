@@ -12,6 +12,7 @@
 \usepackage{amssymb}%
 \usepackage{amsthm}%
 \usepackage{amsopn}%
+\usepackage{amsfonts}
 \usepackage{textcomp}%
 
 \newtheorem{definition}{Определение}
@@ -58,10 +59,12 @@
 %   \par
 %   \vskip 1.5em}
 % \makeatother
+\newcommand{\overbar}[1]%
+{\mkern 1.5mu\overline{\mkern-1.3mu#1\mkern-1.3mu}\mkern 1.3mu}
 
 \newcommand{\s}{\ensuremath{s}}
-\newcommand{\p}{\ensuremath{\overline{p}}}
-\newcommand{\q}{\ensuremath{\overline{q}}}
+\newcommand{\p}{\ensuremath{\overbar{p}}}
+\newcommand{\q}{\ensuremath{\overbar{q}}}
 \DeclareMathOperator{\E}{\mathbb{E}}
 \DeclareMathOperator{\D}{\mathbb{D}}
 \DeclareMathOperator{\Z}{\mathbb{Z}}
@@ -71,6 +74,8 @@
 \DeclareMathOperator{\SPStrategies}{\mathrm{T}}
 \newcommand{\V}[1][n]{\ensuremath{V_{#1}}}
 \newcommand{\High}[1][\ensuremath{\infty}]{\ensuremath{H_{#1}}}
+\newcommand{\sigmav}{\ensuremath{\overbar{\sigma}}}
+\newcommand{\tauv}{\ensuremath{\overbar{\tau}}}
 
 \begin{document}
 
@@ -176,15 +181,15 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
 
 Обозначим через $\Delta(X)$ множество вероятностных распределений над $X$.
 \begin{definition}
-  Стратегией игрока 1 является последовательность ходов $\sigma = (\sigma_1,
+  Стратегией игрока 1 является последовательность ходов $\sigmav = (\sigma_1,
   \ldots, \sigma_n)$, где $\sigma_t: S \times I^{t-1} \rightarrow \Delta(I)$.
   Множество стратегий игрока 1 обозначим $\FPStrategies$.
 \end{definition}
 
 \begin{definition}
-  Стратегией игрока 2 является последовательность ходов $\tau = (\tau_1, \ldots,
-  \tau_n)$, где $\tau_t: I^{t-1} \rightarrow \Delta(J)$. Множество стратегий
-  игрока 2 обозначим $\SPStrategies$.
+  Стратегией игрока 2 является последовательность ходов $\tauv = (\tau_1,
+  \ldots, \tau_n)$, где $\tau_t: I^{t-1} \rightarrow \Delta(J)$. Множество
+  стратегий игрока 2 обозначим $\SPStrategies$.
 \end{definition}
 
 То есть, игрок 1 на каждом шаге игры рандомизирует свои действия в зависимости
@@ -200,32 +205,32 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
   При использовании игроком 1 стратегии $\sigma$, игроком 2 -- стратегии $\tau$,
   ожидаемый выигрыш игрока 1 равен
   \begin{equation*}
-    \K(\p, \sigma, \tau) =
-    \E_{(\p, \sigma, \tau)} \sum_{t=1}^n a^s(i_t, j_t),
+    \K(\p, \sigmav, \tauv) =
+    \E_{(\p, \sigmav, \tauv)} \sum_{t=1}^n a^s(i_t, j_t),
   \end{equation*}
-  где математическое ожидание берется по мере, индуцированной $\p$, $\sigma$ и
-  $\tau$.
+  где математическое ожидание берется по мере, индуцированной $\p$, $\sigmav$ и
+  $\tauv$.
 \end{definition}
 Заданную таким образом игру обозначим $\G(\p)$.
 
 \begin{definition}
-  Если для некоторых $\sigma^* \in \FPStrategies,$ $\tau^* \in \SPStrategies$
+  Если для некоторых $\sigmav^* \in \FPStrategies,$ $\tauv^* \in \SPStrategies$
   выполняется
   \begin{equation*}
-    \sup_{\sigma \in \FPStrategies} \inf_{\tau \in \SPStrategies} \K(\p, \sigma, \tau) =
-    \K(\p, \sigma^*, \tau^*) =
-    \inf_{\tau \in \SPStrategies} \sup_{\sigma \in \FPStrategies} \K(\p, \sigma, \tau) = 
+    \sup_{\sigmav \in \FPStrategies} \inf_{\tauv \in \SPStrategies} \K(\p, \sigmav, \tauv) =
+    \K(\p, \sigmav^*, \tauv^*) =
+    \inf_{\tauv \in \SPStrategies} \sup_{\sigmav \in \FPStrategies} \K(\p, \sigmav, \tauv) = 
     \V(\p),
   \end{equation*}
-  то игра $\G(\p)$ имеет значение $\V(\p)$, а стратегии $\sigma^*$ и $\tau^*$
+  то игра $\G(\p)$ имеет значение $\V(\p)$, а стратегии $\sigmav^*$ и $\tauv^*$
   являются оптимальными.
 \end{definition}
 
 Следуя \cite{bib:domansky11}, опишем рекурсивную структуру игры $\G(\p)$.
-Представим стратегию игрока 1 в виде $\sigma = (\sigma_1, \sigma^i, i \in I)$,
-где $\sigma_1$ --- ход игрока на первом шаге, а $\sigma^i$ --- стратегия в игре
+Представим стратегию игрока 1 в виде $\sigmav = (\sigma, \sigmav^i, i \in I)$,
+где $\sigma$ --- ход игрока на первом шаге, а $\sigmav^i$ --- стратегия в игре
 продолжительности $n-1$ в зависимости от ставки $i$ на первом шаге. Аналогично,
-стратегию игрока 2 представим в виде $\tau = (\tau_1, \tau^i, \; i \in I)$.
+стратегию игрока 2 представим в виде $\tauv = (\tau, \tauv^i, \; i \in I)$.
 %
 Далее, обозначим $q_i$ полную вероятность, с которой игрок 1 делает ставку $i
 \in I$, и $\q = (q_i, \; i \in I)$ --- соответствующее распределение. Также
@@ -234,9 +239,9 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
 апостериорное распределение. Тогда для значения выигрыша будет справедлива
 формула
 \begin{equation*}
-  \K[n](\p, \sigma, \tau) =
-  \K[1](\p, \sigma_1, \tau_1) +
-  \sum_{i \in I} q_i \K[n-1](\p^i, \sigma^i, \tau^i).
+  \K[n](\p, \sigmav, \tauv) =
+  \K[1](\p, \sigma, \tau) +
+  \sum_{i \in I} q_i \K[n-1](\p^i, \sigmav^i, \tauv^i).
 \end{equation*}
 Таким образом, определить стратегию в игре произвольной продолжительности можно,
 задав ход игрока для любого значения $\p$.
@@ -244,7 +249,7 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
 \section{Оценки на выигрыш в игре $\mathbf{\G[\infty](\p)}$}
 \label{sec:payoff-bounds}
 
-Следуя \cite{bib:domansky11} рассмотрим чистую стратегию $\tau^k$ игрока 2,
+Следуя \cite{bib:domansky11} рассмотрим чистую стратегию $\tauv^k$ игрока 2,
 определенную следующим образом:
 \begin{equation*}
   \tau^k_1 = k, \quad
@@ -259,29 +264,29 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
 
 \begin{lemma}
   \label{upper-bound:lemma:vector-payoffs}
-  При применении стратегии $\tau^k$ в игре $\G(\p)$ игрок 2 в состоянии $s$
+  При применении стратегии $\tauv^k$ в игре $\G(\p)$ игрок 2 в состоянии $s$
   гарантирует себе проигрыш не более
   \begin{gather*}
-    h^s_n(\tau^k) = \sum_{t=0}^{n-1} (k-s-t-1+\beta)^+, \; s \leqslant k, \quad
-    h^s_n(\tau^k) = \sum_{t=0}^{n-1} (s-k-t-\beta)^+, \; s \geqslant k.
+    h^s_n(\tauv^k) = \sum_{t=0}^{n-1} (k-s-t-1+\beta)^+, \; s \leqslant k, \quad
+    h^s_n(\tauv^k) = \sum_{t=0}^{n-1} (s-k-t-\beta)^+, \; s \geqslant k.
   \end{gather*}
-  Последовательность $\left\{ h^s_n(\tau^k), \; n = \overline{1, \infty}
+  Последовательность $\left\{ h^s_n(\tauv^k), \; n = \overline{1, \infty}
   \right\}$ монотонна, ограничена сверху и сходится к %
-  $h^s_\infty(\tau^k) = (s - k + 1 - 2\beta)(s-k)/2$.
+  $h^s_\infty(\tauv^k) = (s - k + 1 - 2\beta)(s-k)/2$.
 \end{lemma}
 
 Введем следующие обозначения для множества распределений на $S$ с заданным
 математическим ожиданием
 \begin{equation*}
-  \Theta(x) = \left\{ p \in \Delta(S): \E p = x \right\}, \quad
-  \Lambda(x, y) = \left\{ p \in \Delta(S): x < \E p \leqslant y \right\}.
+  \Theta(x) = \left\{ \p' \in \Delta(S): \E \p' = x \right\}, \quad
+  \Lambda(x, y) = \left\{ \p' \in \Delta(S): x < \E \p' \leqslant y \right\}.
 \end{equation*}
 
 \begin{theorem}
   \label{upper-bound:theorem}
   Выигрыш в игре $\G[\infty](\p)$ ограничен сверху функцией
   \begin{equation*}
-    \High(\p) = \min_{k \in J} \sum_{s \in S} p_s  h^s_\infty(\tau^k).
+    \High(\p) = \min_{k \in J} \sum_{s \in S} p_s  h^s_\infty(\tauv^k).
   \end{equation*}
   Функция $\High(\p)$ является кусочно-линейной с областями недифференцируемости
   $\Theta(k+\beta)$ и областями линейности $\Lambda(k - 1 + \beta, s + \beta)$
@@ -290,12 +295,15 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
   \begin{equation*}
     \High(\p) = \D \p + \beta(1-\beta) - \xi(1-\xi).
   \end{equation*}
-  Стратегия $\tau^*$, которая позволяет игроку 2 обеспечить данную оценку,
-  состоит в применении $\tau^k$ при $\p \in \Lambda(k - 1 + \beta, k + \beta)$.
+  Стратегия $\tauv^*$, которая позволяет игроку 2 обеспечить данную оценку,
+  состоит в применении $\tauv^k$ при $\p \in \Lambda(k - 1 + \beta, k + \beta)$.
 \end{theorem}
 Заметим, что как и в \cite{bib:pyanykh16}, в данном случае наблюдается сдвиг
 областей линейности на $\beta$ относительно $\E \p$ в сравнении с результатами в
 \cite{bib:domansky11}.
+
+% Перейдем к описании стратегии игрока 1, которая гарантирует ему выигрыш не менее
+% $\High(\p)$.
 
 \appendix
 \setcounter{secnumdepth}{0}
