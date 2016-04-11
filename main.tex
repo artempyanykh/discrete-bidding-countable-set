@@ -11,9 +11,12 @@
 \usepackage{amsmath}%
 \usepackage{amssymb}%
 \usepackage{amsthm}%
+\usepackage{amsopn}%
 \usepackage{textcomp}%
 
 \newtheorem{definition}{Определение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
 
 % Visuals
 \usepackage{indentfirst}
@@ -59,16 +62,15 @@
 \newcommand{\s}{\ensuremath{s}}
 \newcommand{\p}{\ensuremath{\overline{p}}}
 \newcommand{\q}{\ensuremath{\overline{q}}}
-\newcommand{\E}{\ensuremath{\mathbb{E}}}
-\newcommand{\D}{\ensuremath{\mathbb{D}}}
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\D}{\mathbb{D}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
 \newcommand{\G}[1][n]{\ensuremath{G_{#1}}}
 \newcommand{\K}[1][n]{\ensuremath{K_{#1}}}
-\newcommand{\FPStrategies}{\ensuremath{\Sigma}}
-\newcommand{\SPStrategies}{\ensuremath{\mathrm{T}}}
-\newcommand{\KL}[1][n]{\ensuremath{\underline{K_{#1}}}}
-\newcommand{\KH}[1][n]{\ensuremath{\overline{K_{#1}}}}
+\DeclareMathOperator{\FPStrategies}{\Sigma}
+\DeclareMathOperator{\SPStrategies}{\mathrm{T}}
 \newcommand{\V}[1][n]{\ensuremath{V_{#1}}}
+\newcommand{\High}[1][\ensuremath{\infty}]{\ensuremath{H_{#1}}}
 
 \begin{document}
 
@@ -239,10 +241,73 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
 Таким образом, определить стратегию в игре произвольной продолжительности можно,
 задав ход игрока для любого значения $\p$.
 
-\section{Оценка выигрыша сверху в игре $\mathbf{\G[\infty](\p)}$}
-\label{sec:upper-bound}
+\section{Оценки на выигрыш в игре $\mathbf{\G[\infty](\p)}$}
+\label{sec:payoff-bounds}
 
+Следуя \cite{bib:domansky11} рассмотрим чистую стратегию $\tau^k$ игрока 2,
+определенную следующим образом:
+\begin{equation*}
+  \tau^k_1 = k, \quad
+  t^k_t = \begin{cases}
+    j_{t-1}, &\; i_{t-1} < j_{t-1},\\
+    j_t, &\; i_{t-1} = j_{t-1},\\
+    j_{t+1}, &\; i_{t-1} > j_{t-1}.
+  \end{cases}
+\end{equation*}
+При использовании этой стратегии игрок 2 делает ставку равную $k$ на первом
+шаге, а далее подражает инсайдеру. Введем обозначение $x^+ = \max(0, x)$.
 
+\begin{lemma}
+  \label{upper-bound:lemma:vector-payoffs}
+  При применении стратегии $\tau^k$ в игре $\G(\p)$ игрок 2 в состоянии $s$
+  гарантирует себе проигрыш не более
+  \begin{gather*}
+    h^s_n(\tau^k) = \sum_{t=0}^{n-1} (k-s-t-1+\beta)^+, \; s \leqslant k, \quad
+    h^s_n(\tau^k) = \sum_{t=0}^{n-1} (s-k-t-\beta)^+, \; s \geqslant k.
+  \end{gather*}
+  Последовательность $\left\{ h^s_n(\tau^k), \; n = \overline{1, \infty}
+  \right\}$ монотонна, ограничена сверху и сходится к %
+  $h^s_\infty(\tau^k) = (s - k + 1 - 2\beta)(s-k)/2$.
+\end{lemma}
+
+Введем следующие обозначения для множества распределений на $S$ с заданным
+математическим ожиданием
+\begin{equation*}
+  \Theta(x) = \left\{ p \in \Delta(S): \E p = x \right\}, \quad
+  \Lambda(x, y) = \left\{ p \in \Delta(S): x < \E p \leqslant y \right\}.
+\end{equation*}
+
+\begin{theorem}
+  \label{upper-bound:theorem}
+  Выигрыш в игре $\G[\infty](\p)$ ограничен сверху функцией
+  \begin{equation*}
+    \High(\p) = \min_{k \in J} \sum_{s \in S} p_s  h^s_\infty(\tau^k).
+  \end{equation*}
+  Функция $\High(\p)$ является кусочно-линейной с областями недифференцируемости
+  $\Theta(k+\beta)$ и областями линейности $\Lambda(k - 1 + \beta, s + \beta)$
+  при $k \in S$. Для распределений $\p$ таких, что $\E \p = k - 1 + \beta + \xi,
+  \; \xi \in [0, 1)$ ее значение равно
+  \begin{equation*}
+    \High(\p) = \D \p + \beta(1-\beta) - \xi(1-\xi).
+  \end{equation*}
+  Стратегия $\tau^*$, которая позволяет игроку 2 обеспечить данную оценку,
+  состоит в применении $\tau^k$ при $\p \in \Lambda(k - 1 + \beta, k + \beta)$.
+\end{theorem}
+Заметим, что как и в \cite{bib:pyanykh16}, в данном случае наблюдается сдвиг
+областей линейности на $\beta$ относительно $\E \p$ в сравнении с результатами в
+\cite{bib:domansky11}.
+
+\appendix
+\setcounter{secnumdepth}{0}
+\section{Приложение}
+
+\begin{proof}[Доказательство леммы \ref{upper-bound:lemma:vector-payoffs}]
+  TODO
+\end{proof}
+
+\begin{proof}[Доказательство теоремы \ref{upper-bound:theorem}]
+  TODO
+\end{proof}
 
 \begin{thebibliography}{99}
 % \bibitem{bib:demeyer02}%
