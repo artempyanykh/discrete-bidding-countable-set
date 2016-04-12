@@ -32,7 +32,7 @@
 \cfoot{\thepage}
 \rfoot{}
 \renewcommand{\headrulewidth}{0.8pt}
-\renewcommand{\footrulewidth}{0.8pt}
+% \renewcommand{\footrulewidth}{0.8pt}
 \pagestyle{fancy}
 
 % \renewenvironment{abstract}{%
@@ -169,9 +169,9 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
 
 Пусть множество состояний рынка $S = \Z_+$. Перед началом игры случай выбирает
 состояние рынка $\s \in S$ в соответствии с вероятностным распределением $\p =
-(p^s, \; s \in S)$. На каждом шаге игры $t = \overline{1,n}, \; n \leqslant
-\infty$ игроки делают ставки $i_t \in I, \, j_t \in J$, где $I = J = \Z_+$.
-Выплата игроку 1 в состоянии $s$ равна
+(p^s, \; s \in S)$ таким, что $\D \p < \infty$. На каждом шаге игры $t =
+\overline{1,n}, \; n \leqslant \infty$ игроки делают ставки $i_t \in I, \, j_t
+\in J$, где $I = J = \Z_+$. Выплата игроку 1 в состоянии $s$ равна
 \begin{equation*}
   % \label{eq:ps:stage-payoff}
   a^s(i_t, j_t) =
