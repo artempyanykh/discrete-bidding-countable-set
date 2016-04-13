@@ -241,11 +241,12 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
 ставки $i$ игрока 1 и $\p^i = (p^{s|i}, \, s \in S)$ --- соответствующее
 апостериорное распределение. Тогда для значения выигрыша будет справедлива
 формула
-\begin{equation*}
+\begin{equation}
+  \label{problem:eq:Kn-recurrence}
   \K[n](\p, \sigmav, \tauv) =
   \K[1](\p, \sigma, \tau) +
   \sum_{i \in I} q_i \K[n-1](\p^i, \sigmav^i, \tauv^i).
-\end{equation*}
+\end{equation}
 Таким образом, определить стратегию в игре произвольной продолжительности можно,
 задав ход игрока для любого значения $\p$.
 
@@ -278,7 +279,10 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
   \end{gather*}
   Последовательность $\left\{ h^s_n(\tauv^k), \; n = \overline{1, \infty}
   \right\}$ не убывает, ограничена сверху и сходится к %
-  $h^s_\infty(\tauv^k) = (s - k + 1 - 2\beta)(s-k)/2$.
+  \begin{equation}
+    \label{upper-bound:eq:max-payoff}
+    h^s_\infty(\tauv^k) = (s - k + 1 - 2\beta)(s-k)/2.
+  \end{equation}
 \end{lemma}
 
 Введем следующие обозначения для множества распределений на $S$ с заданным
@@ -292,15 +296,16 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
   \label{upper-bound:theorem}
   Выигрыш в игре $\G[\infty](\p)$ ограничен сверху функцией
   \begin{equation*}
-    \High(\p) = \min_{k \in J} \sum_{s \in S} p_s  h^s_\infty(\tauv^k).
+    \High(\p) = \min_{k \in J} \sum_{s \in S} p^s  h^s_\infty(\tauv^k).
   \end{equation*}
   Функция $\High(\p)$ является кусочно-линейной с областями недифференцируемости
   $\Theta(k+\beta)$ и областями линейности $\Lambda(k - 1 + \beta, s + \beta)$
   при $k \in S$. Для распределений $\p$ таких, что $\E \p = k - 1 + \beta + \xi,
   \; \xi \in (0, 1]$ ее значение равно
-  \begin{equation*}
+  \begin{equation}
+    \label{upper-bound:eq:H(p)}
     \High(\p) = \left( \D \p + \beta(1-\beta) - \xi(1-\xi) \right)/2.
-  \end{equation*}
+  \end{equation}
   Стратегия $\tauv^*$, которая позволяет игроку 2 обеспечить данную оценку,
   состоит в применении $\tauv^k$ при $\p \in \Lambda(k - 1 + \beta, k + \beta)$.
 \end{theorem}
@@ -309,14 +314,16 @@ $\beta \max(p_1, p_2) + (1-\beta) \min(p_1, p_2)$. Фактически в
 \cite{bib:domansky11}.
 
 Перейдем к описании стратегии игрока 1, которая гарантирует ему выигрыш не менее
-$\High(\p)$. Пусть $\sigma^s_i$ --- компонента хода игрока 1, т.е. вероятность
-сделать ставку $i$ в состоянии $s$. По правилу Байеса $\sigma^s_i = p^{s|i} q^i
-/ p^s$. Таким образом, ход игрока 1 можно определить, задав полные вероятности
-$q^i$ сделать ставку $i$ и апостериорные вероятности $p^{s|i}$ для $i \in I$.
-Тогда в терминах $\q$, $\p^i$ одношаговый выигрыш выражается следующим образом:
-\begin{equation*}
+$\High(\p)$. Пусть $\sigma^s_i$ --- компонента хода $\sigma$ игрока 1, т.е.
+вероятность сделать ставку $i$ в состоянии $s$. По правилу Байеса $\sigma^s_i =
+p^{s|i} q^i / p^s$. Таким образом, ход игрока 1 можно определить, задав полные
+вероятности $q^i$ сделать ставку $i$ и апостериорные вероятности $p^{s|i}$ для
+$i \in I$. Тогда в терминах $\q$, $\p^i$ одношаговый выигрыш выражается
+следующим образом:
+\begin{equation}
+  \label{lower-bound:eq:K1(q,pi)}
   \K[1](\p, \sigma, j) = \sum_{i \in I} \sum_{s \in S} q^i p^{s|i} a^s(i, j).
-\end{equation*}
+\end{equation}
 
 Обозначим $\Low[n](\p)$ --- минимальный выигрыш, который может гарантировать
 себе игрок 1 в игре $\G(\p)$.
@@ -325,13 +332,15 @@ $q^i$ сделать ставку $i$ и апостериорные вероят
   Пусть %
   $\q_l = (q^1_l, \ldots, q^n_l),$ %
   $\p^i_l = ( p^{1|i}_l, p^{2|i}_l, \ldots)$ %
-  отвечают первому ходу стратегии игрока 1, которая гарантирует ему выигрыш
-  $\Low[n](\p_l)$, $l = 1,2$. Тогда для $\p = \lambda \p_1 + (1-\beta) \p_2, \;
-  \lambda \in [0, 1],$ стратегия, первый ход которой задается параметрами
-  \begin{equation*}
+  отвечают первому ходу стратегии $\sigmav_l$ игрока 1, которая гарантирует ему
+  выигрыш $\Low[n](\p_l)$, $l = 1,2$. Тогда для $\p = \lambda \p_1 + (1-\beta)
+  \p_2, \; \lambda \in [0, 1],$ стратегия $\sigmav_c$, первый ход которой задается
+  параметрами
+  \begin{equation}
+    \label{lower-bound:eq:q-pi}
     q^i = \lambda q^i_1 + (1-\lambda) q^i_2, \quad
     p^{s|i} = \left(\lambda q^i_1 p^{s|i}_1 + (1-\lambda) q^i_2 p^{s|i}_2\right)/q^i,
-  \end{equation*}
+  \end{equation}
   гарантирует игроку 1 выигрыш $\lambda \Low[n](\p_1) + (1-\lambda)
   \Low[n](\p_2)$.
 \end{lemma}
@@ -464,11 +473,67 @@ $\left\{ \Theta(s), \Theta(s+\beta) \right\}$, %
 \end{proof}
 
 \begin{proof}[Доказательство теоремы \ref{upper-bound:theorem}]
-  TODO
+  Воспользовавшись \eqref{upper-bound:eq:max-payoff}, получим
+  \begin{equation}
+    \label{upper-bound:theorem:eq:1}
+    \sum_{s \in S} p^s h^s_\infty(\tauv^j) =
+    \left(
+      j^2 + (2\beta - 1 - 2 \E \p)j - (2\beta - 1) \E \p + \E \p^2
+    \right)/2.
+  \end{equation}
+  
+  Квадратичная функция $f(x) = x^2 + (2\beta - 1 - \E \p)x$
+  достигает минимума при $x = \E \p - \beta + 1/2$. Отсюда при $\p \in \Lambda(k
+  - 1 + \beta, k + \beta)$ выражение \eqref{upper-bound:theorem:eq:1} достигает
+  минимума при $j = k$. Равенство \eqref{upper-bound:eq:H(p)} проверяется
+  непосредственной подстановкой $\E \p = k - 1 + \beta + \xi$ в
+  \eqref{upper-bound:theorem:eq:1}.
 \end{proof}
 
 \begin{proof}[Доказательство леммы \ref{lower-bound:lemma:convex-combination}]
-  TODO
+  Проведем доказательство по индукции. Покажем, что справедливо равенство %
+  \begin{equation}
+    \label{lower-bound:lemma:convex-combination:eq:1}
+    \K[n](\p, \sigmav_c, \tauv) =
+    \lambda \K[n](\p_1, \sigmav_1, \tauv) +
+    (1-\lambda)\K[n](\p_1, \sigmav_2, \tauv).
+  \end{equation}
+  Подставив \eqref{lower-bound:eq:q-pi} в
+  \eqref{lower-bound:eq:K1(q,pi)}, получим
+  \begin{gather*}
+    \K[1](\p, \sigmav_c, j) = \sum_{i \in I, \, s \in S}
+    q^i \frac{\lambda q^i_1 p^{s|i}_1 + (1-\lambda) q^i_2 p^{s|i}_2}{q^i} a^s(i,j) =
+    \lambda \sum_{i \in I, \, s \in S} q^i_1 p^{s|i}_1 a^s(i,j) + \\
+    + (1-\lambda) \sum_{i \in I, s \in S} q^i_2 p^{s|i}_2 a^s(i, j) =
+    \lambda \K[1](\p_1, \sigmav_1, j) +
+    (1-\lambda)\K(\p_2, \sigmav_2, j).
+  \end{gather*}
+  Таким образом, утверждение справедливо при $n = 1$. Пусть утверждение имеет
+  место при $n \leqslant N$. Тогда из \eqref{problem:eq:Kn-recurrence} вытекает
+  \begin{multline*}
+    \K[N+1](\p, \sigmav_c, \tauv) =
+    \K[1](\p, \sigmav_c, \tauv) +
+    \sum_{i \in I} q_i \K[N](\p^i, \sigmav^i_c, \tau^i) =
+    \lambda \K[1](\p_1, \sigma_1, \tau) + \\
+    + (1-\lambda) \K[1](\p_2, \sigma_2, \tau) +
+    \sum_{i \in I} q^i \left(
+      \frac{\lambda q^i_1}{q^i} \K[N](\p^i_1, \sigmav^i_1, \tauv^i) +
+      \frac{(1-\lambda) q^i_2}{q^i} \K[N](\p^i_2, \sigmav^i_2, \tauv^i)
+    \right) = \\
+    = \lambda \K[N+1](\p_1, \sigmav_1, \tauv) +
+    (1-\lambda)\K[N+1](\p_1, \sigmav_2, \tauv).
+  \end{multline*}
+  Справделивость равенства \eqref{lower-bound:lemma:convex-combination:eq:1}
+  доказана. Отсюда получаем
+  \begin{gather*}
+    \Low[n](\p) = \min_{\tauv \in \SPStrategies} \K[n](\p, \sigmav_c, j) \geqslant
+    \lambda \min_{\tauv \in \SPStrategies} \K[n](\p, \sigmav_1, j) +
+    (1-\lambda) \min_{\tauv \in \SPStrategies} \K[n](\p, \sigmav_2, j) = \\
+    = \lambda \Low[n](\p_1) + (1-\lambda) \Low[n](\p_2).
+  \end{gather*}
+  Получили, что стратегия $\sigmav_c$ обеспечивает игроку 1 в игре $\G[n](\p)$
+  соответствующую выпуклую комбинацию гарантированных выигрышей в играх
+  $\G[n](\p_1)$ и $\G[n](\p_2)$.
 \end{proof}
 
 \begin{proof}[Доказательство леммы \ref{lower-bound:lemma:stage-payoff}]
