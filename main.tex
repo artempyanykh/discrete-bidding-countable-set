@@ -372,12 +372,18 @@ $\p^{k+\beta}(l,r), \; k \in S$. Построим соответствующую
 \end{lemma}
 
 Распространяя результаты \cite{bib:pyanykh16} на случай $\p^{k+\beta}(l, r)$,
-определим следующую стратегию игрока 1 в игре $\G[\infty](\p)$.
+определим следующую стратегию игрока 1 в игре $\G[\infty](\p)$. Введем
+обозначение %
+\begin{equation*}
+  P(l,r) = \left\{
+    \p^k(l, r), \, \p^{s+\beta}(l, r), \, k = \overline{l,r}, s = \overline{l,r-1}
+  \right\}.
+\end{equation*}
 
 \begin{definition}
-  Первый ход стратегии $\sigmav^*$ определяется следующим образом. При $\p =
-  \p^l(l,r)$ и $\p = \p^r(l,r)$ игрок 1 использует ставки $l$ и $r$,
-  соответственно, с вероятностью 1. Для %
+  При $\p \in P(l,r)$ первый ход стратегии $\sigmav^*$ определяется следующим
+  образом: если $\p = \p^l(l,r)$ и $\p = \p^r(l,r)$ игрок 1 использует ставки
+  $l$ и $r$, соответственно, с вероятностью 1; если же %
   $\p \in \left\{ \p^k(l, r), \, \p^{k+\beta}(l, r) \right\}$ %
   игрок 1 использует $\sigmak_k$ с параметрами
   \begin{align*}
@@ -403,25 +409,31 @@ $\p^{k+\beta}(l,r), \; k \in S$. Построим соответствующую
   \label{lower-bound:theorem}
   При использовании стратегии $\sigmav^*$ в игре $\G[\infty](\p)$ для
   распределения %
-  $\p \in \left\{ \p^k(l, r), \, \p^{k+\beta}(l, r) \right\}$ %
+  $\p \in P(l,r)$ %
   гарантированный выигрыш игрока 1 удовлетворяет следующей системе:
-  \begin{gather*}
-    \Low(\p^{k+\beta}(l,r)) = 
-    \beta(1-\beta) + (1-\beta) \Low(\p^k(l, r)) + \beta \Low(\p^{k+1}(l, r)), \;
-    k \in \overline{l, r - 1}, \\
-    \Low(\p^k(l,r)) = 
-    \beta \Low(\p^{k-1+\beta}(l, r)) + (1-\beta) \Low(\p^{k+\beta}(l, r)), \;
-    k \in \overline{l + 1, r - 1},\\
-    \Low(\p^l(l,r)) = \Low(\p^r(l,r)) = 0.
-  \end{gather*}
+  \begin{equation}
+    \small
+    \label{lower-bound:eq:Linf-recurrence}
+    \begin{aligned}
+      &\Low(\p^{k+\beta}(l,r)) =
+      \beta(1-\beta) + (1-\beta) \Low(\p^k(l, r)) + \beta \Low(\p^{k+1}(l, r)), \;
+      k \in \overline{l, r - 1}, \\
+      &\Low(\p^k(l,r)) =
+      \beta \Low(\p^{k-1+\beta}(l, r)) + (1-\beta) \Low(\p^{k+\beta}(l, r)), \;
+      k \in \overline{l + 1, r - 1},\\
+      &\Low(\p^l(l,r)) = \Low(\p^r(l,r)) = 0.
+    \end{aligned}
+  \end{equation}
   Ее решение дает нижнюю оценку выигрыша игрока 1 равную
-  \begin{equation*}
+  \begin{equation}
+    \label{lower-bound:eq:Linf-recurrence-solution}
     \Low(\p^{k+\beta}(l, r)) = ((r-k-\beta)(k+\beta-l) + \beta(1-\beta))/2.
-  \end{equation*}
+  \end{equation}
 \end{theorem}
 
 Так как $\D p^{k+\beta}(l, r) = (r-k-\beta)(k+\beta-l)$, то выражения для
-$\High(\p)$ и $\Low(\p)$ совпадают. Таким образом, справедлива следующая
+$\High(\p^{k+\beta}(l,r))$ и $\Low(\p^{k+\beta}(l,r))$ совпадают. Таким образом,
+справедлива следующая
 \begin{theorem}
   \label{solution:theorem}
   Игра $\G[\infty](\p)$ имеет значение $\V[\infty](\p) = \High(\p) = \Low(\p)$.
@@ -523,7 +535,7 @@ $\left\{ \Theta(s), \Theta(s+\beta) \right\}$, %
     = \lambda \K[N+1](\p_1, \sigmav_1, \tauv) +
     (1-\lambda)\K[N+1](\p_1, \sigmav_2, \tauv).
   \end{multline*}
-  Справделивость равенства \eqref{lower-bound:lemma:convex-combination:eq:1}
+  Справедливость равенства \eqref{lower-bound:lemma:convex-combination:eq:1}
   доказана. Отсюда получаем
   \begin{gather*}
     \Low[n](\p) = \min_{\tauv \in \SPStrategies} \K[n](\p, \sigmav_c, j) \geqslant
@@ -537,11 +549,29 @@ $\left\{ \Theta(s), \Theta(s+\beta) \right\}$, %
 \end{proof}
 
 \begin{proof}[Доказательство леммы \ref{lower-bound:lemma:stage-payoff}]
-  TODO
+  По аналогии с \cite{bib:pyanykh16} можно показать, что
+  \begin{equation*}
+    a^s(\sigmak_k, j) = \begin{cases}
+      s - \beta k - (1-\beta) j - \beta \sigma^s_{k+1}, &\; j < k,\\
+      (s - k - \beta) \sigma^s_{k+1}, &\; j = k,\\
+      (k + \beta - s) \sigma^s_k, &\; j = k+1,\\
+      (1-\beta) k + \beta j - s + (1-\beta) \sigma^s_{k+1}, &\; j > k + 1.
+    \end{cases}
+  \end{equation*}
+  Отсюда непосредственно следует утверждение леммы.
 \end{proof}
 
 \begin{proof}[Доказательство теоремы \ref{lower-bound:theorem}]
-  TODO
+  Для $\p \in P(l,r)$ определение стратегия $\sigmav^*$ аналогично определению
+  оптимальной стратегии игрока 1 из \cite{bib:pyanykh16} с заменой $0, m$ на $l,
+  r$ соответственно.
+
+  Параметры $\q$ и $\p^i$ подобраны таким образом, чтобы выполнялись равенства %
+  $\Low[1](\p^k(l,r)) = 0, \, \Low[1](\p^{k+\beta}(l,r)) = \beta(1-\beta)$, а
+  апостериорные распределения принадлежали тому же множеству $P(l,r)$.
+  Полученная система \eqref{lower-bound:eq:Linf-recurrence} является системой с
+  трехдиагональной матрицей и решается методом прогонки аналогично тому, как это
+  было сделано в \cite{bib:pyanykh16}.
 \end{proof}
 
 \begin{thebibliography}{99}
