@@ -5,3 +5,4 @@ auto/
 *.log
 *.synctex.gz
 *region*.tex
+sample.tex
