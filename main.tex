@@ -600,7 +600,7 @@ $\p \in P'(l,r)$ %
 \appendix
 
 \begin{proof}\underline{[Лемма~\ref{upper-bound:lemma:vector-payoffs}]}
-  Проведем доказательство по индукции для случая $s > k$.
+  Проведем доказательство индукцией по $n$ для случая $s > k$.
   При $n = 1$ оптимальный ответ первого игрока на $\tauv^k$ будет $i = k + 1$.
   Тогда его выигрыш в игре $\G[1](\p)$ равен
   \begin{equation*}
@@ -710,7 +710,7 @@ $\p \in P'(l,r)$ %
 \end{proof}
 
 \begin{proof}\underline{[Лемма~\ref{lower-bound:lemma:stage-payoff}]}
-  По аналогии с \cite{bib:pyanykh16} можно показать, что
+  Можно показать, что
   \begin{equation*}
     \as(\sigmak_k, j) = \begin{cases}
       s - \beta k - (1-\beta) j - \beta \sigma^s_{k+1}, &\; j < k,\\
@@ -723,16 +723,23 @@ $\p \in P'(l,r)$ %
 \end{proof}
 
 \begin{proof}\underline{[Теорема~\ref{lower-bound:theorem}]}
-  Для $\p \in P(l,r)$ определение стратегия $\sigmav^*$ аналогично определению оптимальной стратегии первого игрока из \cite{bib:pyanykh16} с заменой $0, m$ на $l, r$ соответственно.
-
-  Параметры $\q$ и $\p^i$ подобраны таким образом, чтобы выполнялись равенства %
-  \[
-    \Low[1](\p^k(l,r)) = 0, \, \Low[1](\p^{k+\beta}(l,r)) = \beta(1-\beta),
-  \]
-  а апостериорные распределения принадлежали тому же множеству $P(l,r)$.
-  Полученная система \eqref{lower-bound:eq:Linf-recurrence} является системой с
-  трехдиагональной матрицей и решается методом прогонки аналогично тому, как это
-  было сделано в \cite{bib:pyanykh16}.
+  Для $\p \in P(l,r)$ стратегия $\sigmav^*$ определяется аналогично работе \cite{bib:pyanykh16} с заменой $0$ и $m$ на $l$ и $r$ соответственно.
+  Из леммы~\ref{lower-bound:eq:K1(q,pi)} нетрудно вывести, что
+  \begin{equation*}
+    L^k_1(\sigmav^*) = 0,\quad
+    L^{k+\beta}_1(\sigmav^*) = \beta(1-\beta).
+  \end{equation*}
+  Для $k = \overline{l+1,r-1}$ имеем
+  \begin{multline*}
+    L^k_\infty(\sigmav^*) = L^k_1(\sigmav^*) + q^k L^{k-1+\beta}_\infty(\sigmav^*) + q^{k+1} L^{k+\beta}_\infty(\sigmav^*) = \\
+    = \beta L^{k-1+\beta}_\infty(\sigmav^*) + (1-\beta) L^{k+\beta}_\infty(\sigmav^*).
+  \end{multline*}
+  Аналогично для $k = \overline{l, r-1}$ получаем
+  \begin{multline*}
+    L^{k+\beta}_\infty(\sigmav^*) = L^{k+\beta}_1(\sigmav^*) + q^k L^k_\infty(\sigmav^*) + q^{k+1} L^{k+1}_\infty(\sigmav^*) = \\
+    = \beta(1-\beta) + (1-\beta) L^k_\infty(\sigmav^*) + \beta L^{k+1}_\infty(\sigmav^*).
+  \end{multline*}
+  Полученная система \eqref{lower-bound:eq:Linf-recurrence} является системой с трехдиагональной матрицей и решается методом прогонки (см. \cite{bib:pyanykh16}).
 \end{proof}
 
 \begin{thebibliography}{10}
