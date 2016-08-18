@@ -107,6 +107,8 @@
 \newcommand{\eqdef}{\overset{\mathrm{def}}{=}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\LL}{L^1(\{s^2\})}
+\newcommand{\ceil}[1]{\ensuremath{\lceil #1 \rceil}}
+\newcommand{\floor}[1]{\ensuremath{\lfloor #1 \rfloor}}
 
 \begin{document}
 
@@ -329,16 +331,18 @@
 Как показано в \cite{bib:domansky11}, любое распределение $\p = (p^s,\ s \in S) \in \Theta(x)$ может быть представлено в виде выпуклой комбинации распределений с двухточечным носителем следующим образом:
 \begin{gather}
   \label{lower-bound:eq:prob-decomp-sum}
-  \p = p^x e^x + \sum_{r=x+1}^\infty \sum_{l=0}^{x-1} \alpha_{l,r}(\p) p^x(l, r),\\
+  \p = p^x e^x + \sum_{r=\floor{x+1}}^\infty \sum_{l=0}^{\ceil{x-1}} \alpha_{l,r}(\p) p^x(l, r),\\
   \label{lower-bound:eq:prob-decomp-coeff}
-  \alpha_{l,r}(\p) = (r-l) p^l p^r / \sum_{t=0}^{x-1} p^t (x-t).
+  \alpha_{l,r}(\p) = (r-l) p^l p^r / \sum_{t=0}^{\ceil{x-1}} p^t (x-t),
 \end{gather}
+где $\floor{x}$ --- целая часть $x$, а $\ceil{x} = \floor{x} + 1$.
 
 Множество $\Theta(x)$ является замкнутым выпуклым подмножеством банахова пространства $\LL$ последовательностей $(l^s,\ s \in S)$ с нормой $\norm{l} = \sum_{s = 0}^\infty s^2 |l^s|$.
 
 \begin{lemma}
-  Пусть последовательность $\{l_k\} \subset \LL$ такая, что для любых $s \in S$ и $k \geqslant 1$ верно $l_k^s \geqslant 0,\ l_k^s \leqslant l_{k+1}^s$.
-  Тогда если существует ее сходящаяся по норме подпоследовательность $\{l_{k_j}\}$, то и сама последовательность $\{l_k\}$ сходится по норме.
+  \label{lower-bound:lemma:subseq-convergence}
+  Пусть последовательность $\{l_n\} \subset \LL$ такая, что для любых $s \in S$ и $n \geqslant 1$ верно $l_n^s \geqslant 0,\ l_n^s \leqslant l_{n+1}^s$.
+  Тогда если существует ее сходящаяся по норме подпоследовательность $\{l_{k_n}\}$, то и сама последовательность $\{l_n\}$ сходится по норме.
 \end{lemma}
 
 \begin{lemma}
@@ -726,6 +730,54 @@ $\p \in P'(l,r)$ %
     \lambda \Low[n](\p_1, \sigmav_1) + (1-\lambda) \Low[n](\p_2, \sigmav_2).
   \end{multline*}
 \end{proof}
+
+\begin{proof}\underline{[Лемма~\ref{lower-bound:lemma:subseq-convergence}]}
+  Пусть подпоследовательность $\{l_{j_n}\}$ сходится.
+  Тогда для любого $\varepsilon > 0$ существует $N$ такое, что для любых $j_f, j_g \geqslant N$ выполнено 
+  $\norm{l_{j_f} - l_{j_g}} \leqslant \varepsilon$.
+  В то же время для любых $m \geqslant n \geqslant N$ можно найти $j_q \leqslant n, j_p \geqslant m$, что будет выполнено
+  \begin{gather*}
+    \norm{l_m - l_n} =
+    \sum_{s=0}^\infty s^2 |l_m^s - l_n^s| \leqslant
+    \sum_{s=0}^\infty s^2 |l_{j_p}^s - l_{j_q}^s| =
+    \norm{l_{j_p} - l_{j_q}} \leqslant \varepsilon.
+  \end{gather*}
+  Отсюда последовательность $\{l_n\}$ фундаментальна и в силу полноты пространства $\LL$ сходится.
+\end{proof}
+
+
+\begin{proof}\underline{[Лемма~\ref{lower-bound:lemma:decomp-convergence}]}
+  Проведем доказательство для $x \in S$.
+  Рассмотрим последовательность
+  \begin{equation*}
+    s_n = \sum_{r=x+1}^n \sum_{l=0}^{x-1} \alpha_{l,r}(\p) p^x(l, r).
+  \end{equation*}
+
+  Тогда для $m \geqslant n$ справедливо
+  \begin{align*}
+    \norm{s_m - s_n} &=
+    \norm{
+      \sum_{r=n+1}^m \left(
+        p^r (r-x) \frac{\sum_{l=0}^{x-1} p^l e^l}{\sum_{t=0}^{x-1} p^t (x-t)} + p^r e^r
+      \right)
+    } = \\
+    &= \norm{
+      \sum_{r=n+1}^m p^r \left(
+        r^2 + (r-x) \frac{\sum_{t=0}^{x-1} p^t t^2}{\sum_{t=0}^{x-1} p^t (x-t)}
+      \right)
+    }
+  \end{align*}
+  Так как $\D \p < \infty$, последовательность $s_n$ --- фундаментальна.
+  Ее сходимость к $\p$ следует из покомпонентного равенства векторов вероятностных распределений:
+  \begin{gather*}
+    \sum_{r=x+1}^\infty \alpha_{l,r}(\p) \frac{r-x}{r-l} = p^l,\ l = \overline{0, x-1},\\
+    \sum_{l=0}^{x-1} \alpha_{l,r}(\p) \frac{x-l}{r-l} = p^r,\ r = \overline{x+1, \infty}.
+  \end{gather*}
+  Отсюда в силу леммы~\ref{lower-bound:lemma:subseq-convergence} получаем, что ряд в разложении~\eqref{lower-bound:eq:prob-decomp-sum} также сходится к $\p$.
+
+  Доказательство для нецелых значений $x$ проводится аналогично.
+\end{proof}
+
 
 \begin{proof}\underline{[Лемма~\ref{lower-bound:lemma:stage-payoff}]}
   Можно показать, что
