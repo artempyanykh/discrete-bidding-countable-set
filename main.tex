@@ -331,7 +331,12 @@
  ак показано в \cite{bib:domansky11}, любое распределение $\p = (p^s,\ s \in S) \in \Theta(x)$ может быть представлено в виде выпуклой комбинации распределений с двухточечным носителем следующим образом:
 \begin{gather}
   \label{lower-bound:eq:prob-decomp-sum}
-  \p = p^x e^x + \sum_{r=\floor{x+1}}^\infty \sum_{l=0}^{\ceil{x-1}} \alpha_{l,r}(\p) p^x(l, r),\\
+  \p = \begin{cases}
+    \displaystyle
+    p^x e^x + \sum_{r=x+1}^\infty \sum_{l=0}^{x-1} \alpha_{l,r}(\p) \p^x(l, r),\ & x \in S,\\
+    \displaystyle
+    \sum_{r=\floor{x+1}}^\infty \sum_{l=0}^{\ceil{x-1}} \alpha_{l,r}(\p) \p^x(l, r),\ & x \notin S,\\
+  \end{cases}\\
   \label{lower-bound:eq:prob-decomp-coeff}
   \alpha_{l,r}(\p) = (r-l) p^l p^r / \sum_{t=0}^{\ceil{x-1}} p^t (x-t),
 \end{gather}
@@ -441,8 +446,8 @@ $
 ѕервый ход такой стратегии использует две ставки $k$ и $k+1$ с полными веро€тност€ми $(1-p^k)\beta$ и $(1-p^k)(1-\beta)$ соответственно.
 јпостериорные веро€тностные распределени€ при этом даютс€ следующими формулами:
 \begin{gather*}
-  \p^k = \frac{1}{1-p^k} \sum_{r=k+1}^\infty \sum_{l=0}^{k-1} \alpha_{l,r}(\p) \p^{k-1}(l, r),\\
-  \p^{k+1} = \frac{1}{1-p^k} \sum_{r=k+1}^\infty \sum_{l=0}^{k-1} \alpha_{l,r}(\p) \p^{k+1}(l, r).
+  \p^k = \frac{1}{1-p^k} \sum_{r=k+1}^\infty \sum_{l=0}^{k-1} \alpha_{l,r}(\p) \p^{k-1+\beta}(l, r),\\
+  \p^{k+1} = \frac{1}{1-p^k} \sum_{r=k+1}^\infty \sum_{l=0}^{k-1} \alpha_{l,r}(\p) \p^{k+\beta}(l, r).
 \end{gather*}
 ƒл€ распределений $\p$ со счетным носителем сходимость данных р€дов устанавливаетс€ аналогично доказательству леммы~\ref{lower-bound:lemma:decomp-convergence}.
 
@@ -750,7 +755,7 @@ $\p \in P'(l,r)$ %
   ѕроведем доказательство дл€ $x \in S$.
   –ассмотрим последовательность
   \begin{equation*}
-    s_n = \sum_{r=x+1}^n \sum_{l=0}^{x-1} \alpha_{l,r}(\p) p^x(l, r).
+    s_n = \sum_{r=x+1}^n \sum_{l=0}^{x-1} \alpha_{l,r}(\p) \p^x(l, r).
   \end{equation*}
 
   “огда дл€ $m \geqslant n$ справедливо
@@ -761,11 +766,9 @@ $\p \in P'(l,r)$ %
         p^r (r-x) \frac{\sum_{l=0}^{x-1} p^l e^l}{\sum_{t=0}^{x-1} p^t (x-t)} + p^r e^r
       \right)
     } = \\
-    &= \norm{
-      \sum_{r=n+1}^m p^r \left(
-        r^2 + (r-x) \frac{\sum_{t=0}^{x-1} p^t t^2}{\sum_{t=0}^{x-1} p^t (x-t)}
-      \right)
-    }
+    &= \sum_{r=n+1}^m p^r \left(
+      r^2 + (r-x) \frac{\sum_{t=0}^{x-1} p^t t^2}{\sum_{t=0}^{x-1} p^t (x-t)}
+    \right)
   \end{align*}
   “ак как $\D \p < \infty$, последовательность $s_n$ --- фундаментальна.
   ≈е сходимость к $\p$ следует из покомпонентного равенства векторов веро€тностных распределений:
