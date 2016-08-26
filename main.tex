@@ -773,14 +773,17 @@ $\p \in P'(l,r)$ %
 
 \begin{proof}\underline{[Лемма~\ref{lower-bound:lemma:subseq-convergence}]}
   Пусть подпоследовательность $\{l_{j_n}\}$ сходится.
-  Тогда для любого $\varepsilon > 0$ существует $N$ такое, что для любых $j_f, j_g \geqslant N$ выполнено 
+  Тогда для любого $\varepsilon > 0$ существует $M$ такое, что для любых $f, g \geqslant M$ выполнено 
   $\norm{l_{j_f} - l_{j_g}} \leqslant \varepsilon$.
-  В то же время для любых $m \geqslant n \geqslant N$ можно найти $j_q \leqslant n, j_p \geqslant m$, что будет выполнено
+  Положим $N$ равное $j_M$.
+  
+  Для любых $m \geqslant n \geqslant N$ можно найти $q$ такое, что $j_q \geqslant m$.
+  В силу покомпонентной монотонности последовательности $\{l_n\}$ выполнено неравенство
   \begin{gather*}
     \norm{l_m - l_n} =
     \sum_{s=0}^\infty s^2 |l_m^s - l_n^s| \leqslant
-    \sum_{s=0}^\infty s^2 |l_{j_p}^s - l_{j_q}^s| =
-    \norm{l_{j_p} - l_{j_q}} \leqslant \varepsilon.
+    \sum_{s=0}^\infty s^2 |l_{j_q}^s - l_{j_M}^s| =
+    \norm{l_{j_q} - l_{j_M}} \leqslant \varepsilon.
   \end{gather*}
   Отсюда последовательность $\{l_n\}$ фундаментальна и в силу полноты пространства $\LL$ сходится.
 \end{proof}
