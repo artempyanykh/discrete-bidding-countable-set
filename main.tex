@@ -111,7 +111,7 @@
 \newcommand{\floor}[1]{\ensuremath{\lfloor #1 \rfloor}}
 \newcommand{\LowV}[1][n]{\ensuremath{\underbar{V}^\beta_{#1}}}
 \newcommand{\HighV}[1][n]{\ensuremath{\overbar{V}^\beta_{#1}}}
-\newcommand{\MM}{\ensuremath{M^2}}
+\newcommand{\MM}{\ensuremath{\overline{P}}}
 
 \begin{document}
 
@@ -289,8 +289,8 @@
 
 —ледующие множества распределений зададим ограничени€ми на математическое ожидание состо€ни€:
 \begin{gather*}
-  \Theta(x) = \left\{ \p \in \Delta(S): \E \p = x,\ \D \p < \infty \right\}, \\
-  \Lambda(x, y) = \left\{ \p' \in \Delta(S): x < \E \p' \leqslant y,\ \D \p < \infty \right\}.
+  \Theta(x) = \left\{ \p \in \MM: \E \p = x \right\}, \\
+  \Lambda(x, y) = \left\{ \p \in \MM: x < \E \p \leqslant y \right\}.
 \end{gather*}
 
 ѕусть $\tauv^*$ --- стратеги€ второго игрока, состо€ща€ в применении $\tauv^k$ при $\p \in \Lambda(k-1+\beta,k+\beta)$.
@@ -334,8 +334,8 @@
 
 \begin{lemma}
   \label{lower-bound:lemma:convex-combination}
-  ѕусть $\p_1, \p_2$ --- распределени€ с конечной дисперсией, $\sigmav_1, \sigmav_2 \in \Sigma$ --- стратегии первого игрока.
-  “огда дл€ $\p = \lambda \p_1 + (1-\lambda) \p_2,\ \lambda \in [0, 1],$ найдетс€ така€ стратеги€ $\sigmav_c$, что
+  ѕусть $\p_1, \p_2 \in \MM$, $\sigmav_1, \sigmav_2 \in \Sigma$ --- стратегии первого игрока.
+  “огда дл€ $\p = \lambda \p_1 + (1-\lambda) \p_2,\ \lambda \in [0, 1],$ найдетс€ така€ стратеги€ $\sigmav_c \in \Sigma$, что
   \[
     \Low[n](\p, \sigmav_c) \geqslant
     \lambda \Low[n](\p_1, \sigmav_1) + (1-\lambda) \Low[n](\p_2, \sigmav_2).
@@ -360,7 +360,7 @@
   \label{lower-bound:eq:prob-decomp-coeff}
   \alpha_{l,r}(\p) = (r-l) p^l p^r / \sum_{t=0}^{\ceil{x-1}} p^t (x-t),
 \end{gather}
-где $\floor{x}$ --- цела€ часть $x$, а $\ceil{x}$ наименьшее целое $y \geqslant x$.
+где $\floor{x}$ --- цела€ часть $x$, а $\ceil{x}$ --- наименьшее целое $y \geqslant x$.
 
 ќбозначим через $\LL$ банахово пространство последовательностей $(l^s,\ s \in S)$ с нормой $\norm{l} = \sum_{s = 0}^\infty s^2 |l^s|$.
 ћножества $\MM$ и $\Theta(x)$ €вл€ютс€ выпуклыми замкнутыми подмножествами $\LL$.
@@ -368,7 +368,7 @@
 \begin{lemma}
   \label{lower-bound:lemma:subseq-convergence}
   ѕусть последовательность $\{l_n\} \subset \LL$ така€, что дл€ любых $s \in S$ и $n \geqslant 1$ верно $l_n^s \geqslant 0,\ l_n^s \leqslant l_{n+1}^s$.
-  “огда если существует ее сход€ща€с€ по норме подпоследовательность $\{l_{k_n}\}$, то и сама последовательность $\{l_n\}$ сходитс€ по норме.
+  “огда если существует ее сход€ща€с€ по норме подпоследовательность $\{l_{j_n}\}$, то и сама последовательность $\{l_n\}$ сходитс€ по норме.
 \end{lemma}
 
 \begin{lemma}
@@ -573,7 +573,7 @@ $
     \hline
     &&&&\\[-1em]
     %
-    $\p^{r-1+\beta}(l, r)$ & $\frac{1-\beta}{2-\beta}$ & $\frac{1}{2-\beta}$ & $\p^{r-1}(l, r)$ & $\p^r(l, r)$\\
+    $\p^{r-1+\beta}(l, r)$ & $\frac{1-\beta}{2-\beta}$ & $\frac{1}{2-\beta}$ & $\p^{r-2+\beta}(l, r)$ & $\p^r(l, r)$\\
     &&&&\\[-1em]
     \hline
     &&&&\\[-1em]
@@ -632,7 +632,7 @@ $\p \in P'(l,r)$ %
 \begin{subequations}
   \label{lower-bound:eq:Linf-recurrence-2}
   \begin{multline}
-    L^{l+\beta}_{\infty,r}(\xiv^*) =
+    L^{l+\beta}_{\infty}(\xiv^*) =
     \frac{\beta}{1+\beta} + \frac{1}{1+\beta} L^l_{\infty}(\xiv^*) + \frac{\beta}{1+\beta} L^{l+1+\beta}_{\infty}(\xiv^*),
   \end{multline}
   \begin{multline}
@@ -642,10 +642,10 @@ $\p \in P'(l,r)$ %
   \begin{multline}
     L^{k+\beta}_{\infty}(\xiv^*) =
     \frac{1}{2} + \frac{1}{2} L^{k-1+\beta}_{\infty}(\xiv^*) + \\
-    + \frac{1}{2} L^{k+1+\beta}_{\infty}(\xiv^*),\ k \in \overline{l+1, r-2},
+    + \frac{1}{2} L^{k+1+\beta}_{\infty}(\xiv^*),\ k = \overline{l+1, r-2},
   \end{multline}
   \begin{equation}
-    L^l_{l,r} = L^r_{l,r} = 0.
+    L^l_{\infty}(\xiv^*) = L^r_{\infty}(\xiv^*) = 0.
   \end{equation}
 \end{subequations}
 
@@ -653,7 +653,7 @@ $\p \in P'(l,r)$ %
 \[
 \High(\p^{k+\beta}(l,r)) = \frac{(r-k-\beta)(k+\beta-l) + \beta(1-\beta)}{2}
 \] 
-вместо $L^{k+\beta}_{l,r}$ данные равенства обращаютс€ в тождества.
+вместо $L^{k+\beta}_{\infty}(\xiv^*)$ данные равенства обращаютс€ в тождества.
 ќтсюда, как и дл€ стратегии $\sigmav^*$, следует, что стратеги€ $\xiv^*$ €вл€етс€ оптимальной.
 
 ќтметим, что в отличие от стратегии $\sigmav^*$ стратеги€ $\xiv^*$ определена при $\beta \in [0, 1]$ и совпадает с оптимальной стратегией инсайдера из \cite{bib:domansky11} при $\beta = 1$.
@@ -792,7 +792,7 @@ $\p \in P'(l,r)$ %
   ѕроведем доказательство дл€ $x \in S$.
   –ассмотрим последовательность
   \begin{equation*}
-    s_n = \sum_{r=x+1}^n \sum_{l=0}^{x-1} \alpha_{l,r}(\p) \p^x(l, r).
+    s_n = p^x e^x + \sum_{r=x+1}^n \sum_{l=0}^{x-1} \alpha_{l,r}(\p) \p^x(l, r).
   \end{equation*}
 
   “огда дл€ $m \geqslant n$ справедливо
