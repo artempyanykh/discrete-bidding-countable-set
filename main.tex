@@ -475,7 +475,7 @@ $
 а распределение $\p^{k+\beta}(l, r)$ удовлетворяет условию теоремы~\ref{upper-bound:theorem} с $\eta = 1$, выражения для $\High[\infty](\p^{k+\beta}(l, r))$ и $\Low[\infty](\p^{k+\beta}(l, r), \sigmav^*)$ совпадают.
 
 Для произвольного распределения $\p \in \Theta(k),\ k \in S$ стратегию $\sigmav^*$ определим следующим образом.
-Если реализуется состояние $s = k$, то гарантированный выигрыш первого игрока не превышает $0$, и стратегия $\sigmav^*$ прекращает игру.
+Если реализуется состояние $s = k$, то гарантированный выигрыш первого игрока не превышает $0$ и он прекращает игру.
 Таким образом, первый игрок, следуя стратегии $\sigmav^*$ прекращает игру с вероятностью $p^k$.
 В противном случае игрок использует конструкцию леммы~\ref{lower-bound:lemma:convex-combination} для построения стратегии, соответствующей выпуклой комбинации распределений $\p^k(l, r)$ в разложении $\p$.
 Первый ход такой стратегии использует две ставки $k$ и $k+1$ с полными вероятностями $(1-p^k)\beta$ и $(1-p^k)(1-\beta)$ соответственно.
@@ -484,7 +484,7 @@ $
   \p^k = \frac{1}{1-p^k} \sum_{r=k+1}^\infty \sum_{l=0}^{k-1} \alpha_{l,r}(\p) \p^{k-1+\beta}(l, r),\\
   \p^{k+1} = \frac{1}{1-p^k} \sum_{r=k+1}^\infty \sum_{l=0}^{k-1} \alpha_{l,r}(\p) \p^{k+\beta}(l, r).
 \end{gather*}
-Для распределений $\p$ со счетным носителем сходимость данных рядов устанавливается аналогично доказательству леммы~\ref{lower-bound:lemma:decomp-convergence}.
+Для распределений $\p$ со счетным носителем сходимость по норме данных рядов устанавливается аналогично доказательству леммы~\ref{lower-bound:lemma:decomp-convergence}.
 
 
 Аналогичные рассуждения справедливы и для распределений $\p \in \Theta(k+\beta) \cup \Lambda(k, k+\beta),\ k \in S$.
@@ -492,7 +492,7 @@ $
 \section{Решение игры $\mathbf{\G[\infty](\p)}$}
 \label{sec:game-solution}
 
-Подчеркнем, что приведенная в п.~\ref{sec:lower-bound} стратегия инсайдера $\sigma^*$ определена только при $\beta \in (0, 1)$.
+Подчеркнем, что приведенная в п.~\ref{sec:lower-bound} стратегия инсайдера $\sigmav^*$ определена только при $\beta \in (0, 1)$.
 
 Нетрудно проверить справедливость следующего равенства:
 \begin{equation*}
@@ -500,7 +500,7 @@ $
 \end{equation*}
 Из него вытекает, что решение игры $\G[\infty](\p^x(l, r))$ сводится к решению игры $G^{1-\beta}_\infty(\p^{l+r-x}(l,r))$.
 При этом ставки, используемые в соответствующих смешанных стратегиях инсайдера, симметричны относительно точки $(l+r)/2$.
-Аналогичные рассуждения справедливы для игры $\G[\infty](\p)$ при любом распределении $\p$.
+Аналогичные рассуждения справедливы для игры $\G[\infty](\p)$ при любом распределении $\p \in \MM$.
 
 Оптимальная стратегия $\sigmav^*$ инсайдера в игре $\G[\infty](\p)$ при $\beta~=~1$ найдена в~\cite{bib:domansky11}.
 Решение $\G[\infty](\p)$ при $\beta = 0$ может быть получено при помощи описанной выше конструкции из решения $\G[\infty](\p)$ при $\beta = 1$.
@@ -562,7 +562,7 @@ $
 Если $\p = \p^l(l,r)$ или $\p = \p^r(l,r)$, то первый игрок использует ставки $l$ и $r$, соответственно, с вероятностью 1.
 В противном случае он использует $\sigmak_k$ с параметрами из таблицы~\ref{tab:insider-strategy2}.
 \begin{table}[htbp]\centering
-  \caption{Параметры стратегии $\xiv^*$ при $\p \in P(l, r)$}
+  \caption{Параметры стратегии $\xiv^*$ при $\p \in P'(l, r)$}
   \label{tab:insider-strategy2}
   \begin{tabular}{|c|c|c|c|c|}
     \hline
@@ -626,7 +626,7 @@ $
   L^{r-1+\beta}_1(\xiv^*) = \frac{1-\beta}{2-\beta},\\
   L^{k+\beta}_1(\xiv^*) = \frac{1}{2},\ k = \overline{l+1,r-2}.
 \end{gather*}
-Отсюда при использовании стратегии $\xiv^*$ в игре $\G[\infty](\p)$ для распределения %
+Отсюда следует, что при использовании стратегии $\xiv^*$ в игре $\G[\infty](\p)$ для распределения %
 $\p \in P'(l,r)$ %
 гарантированный выигрыш первого игрока удовлетворяет следующей системе:
 \begin{subequations}
@@ -701,19 +701,23 @@ $\p \in P'(l,r)$ %
   при $x = \E \p - \beta + 1/2$. Отсюда при $\p \in \Lambda(k - 1 + \beta, k +
   \beta)$ выражение \eqref{upper-bound:theorem:eq:1} достигает минимума при $j =
   k$. Равенство \eqref{upper-bound:eq:H(p)} проверяется непосредственной
-  подстановкой $\E \p = k - 1 + \beta + \xi$ в \eqref{upper-bound:theorem:eq:1}.
+  подстановкой $\E \p = k - 1 + \beta + \eta$ в \eqref{upper-bound:theorem:eq:1}.
 \end{proof}
 
 \begin{proof}\underline{[Лемма~\ref{lower-bound:lemma:convex-combination}]}
-  Докажем следующее утверждение: найдется такая стратегия $\sigmav_c = (\sigma_c, \sigmav_c^i) \in \Sigma$, что при всех $\tauv \in \Tau$ справедливо неравенство
+  Без потери общности будем считать, что второй игрок использует стратегии $\tauv$, в которых распределения на множестве ставок имеют конечные математические ожидания.
+  В противном случае ожидаемый выигрыш первого игрока будет равен бесконечности.
+  Множество таких стратегий обозначим $\Tau'$.
+  
+  Докажем следующее утверждение: найдется такая стратегия $\sigmav_c = (\sigma_c, \sigmav_c^i) \in \Sigma$, что при всех $\tauv \in \Tau'$ справедливо равенство
   \begin{equation}
     \label{lower-bound:lemma:convex-combination:eq:1}
     \K[n](\p, \sigmav_c, \tauv) =
     \lambda \K[n](\p_1, \sigmav_1, \tauv) +
-    (1-\lambda)\K[n](\p_1, \sigmav_2, \tauv).
+    (1-\lambda)\K[n](\p_2, \sigmav_2, \tauv).
   \end{equation}
   Доказательство проведем по индукции.
-  Пусть $\q_h = (q_h^i,\ i \in I)$ и $\p_h^i = (\p_h^{s|i},\ s \in S)$ --- векторы полных и апостериорных вероятностей, соответствующие первому ходу $\sigma_h$ стратегии $\sigmav_h,\ h = 1, 2$.
+  Пусть $\q_h = (q_h^i,\ i \in I)$ и $\p_h^i = (p_h^{s|i},\ s \in S)$ --- векторы полных и апостериорных вероятностей, соответствующие первому ходу $\sigma_h$ стратегии $\sigmav_h,\ h = 1, 2$.
   Определим первый ход $\sigma_c$ стратегии $\sigmav_c$ параметрами
   \begin{equation*}
     % \label{lower-bound:eq:q-pi}
@@ -726,12 +730,12 @@ $\p \in P'(l,r)$ %
   \end{equation*}
   Подставив эти выражения в \eqref{lower-bound:eq:K1(q,pi)}, для любого $j \in J$ имеем:
   \begin{gather*}
-    \K[1](\p, \sigmav_c, j) =
+    \K[1](\p, \sigma_c, j) =
     \sum_{i \in I}\sum_{s \in S} q^i p^{s|i} \as(i, j) = \\
     \sum_{i \in I, \, s \in S}
     q^i \frac{(\lambda q^i_1 p^{s|i}_1 + (1-\lambda) q^i_2 p^{s|i}_2)}{q^i} \as(i,j) = \\
-    = \lambda \K[1](\p_1, \sigmav_1, j) +
-    (1-\lambda)\K(\p_2, \sigmav_2, j).
+    = \lambda \K[1](\p_1, \sigma_1, j) +
+    (1-\lambda)\K[1](\p_2, \sigma_2, j).
   \end{gather*}
   Осредняя это равенство по произвольному $\tau \in \Delta(J)$, получим \eqref{lower-bound:lemma:convex-combination:eq:1} при $n = 1$.
   Предположим, что утверждение имеет место при любых $n \leqslant N$.
@@ -742,16 +746,16 @@ $\p \in P'(l,r)$ %
   для $\sigmav_1^i,\ \sigmav_2^i$ найдется такая стратегия первого игрока $\sigmav_c^i$ в игре $\G[N](\p^i)$, что для любой стратегии $\tauv^i$
   \begin{equation*}
     \begin{gathered}
-      \K[N](\p^i, \sigmav^i_c, \tau^i) =
+      \K[N](\p^i, \sigmav^i_c, \tauv^i) =
       \frac{\lambda q^i_1}{q^i} \K[N](\p^i_1, \sigmav^i_1, \tauv^i) +
       \frac{(1-\lambda) q^i_2}{q^i} \K[N](\p^i_2, \sigmav^i_2, \tauv^i).
     \end{gathered}
   \end{equation*}
-  В результате для $\sigmav_c = (\sigma_c, \sigma_c^i) \in \Sigma$ и любой стратегии $\tauv = (\tau, \tau^i) \in \Tau$ в игре $\G[N+1](\p)$ справедливо равенство
+  В результате для $\sigmav_c = (\sigma_c, \sigmav_c^i) \in \Sigma$ и любой стратегии $\tauv = (\tau, \tauv^i) \in \Tau'$ в игре $\G[N+1](\p)$ справедливо равенство
   \begin{gather*}
     \K[N+1](\p, \sigmav_c, \tauv) =
-    \K[1](\p, \sigmav_c, \tauv) +
-    \sum_{i \in I} q_i \K[N](\p^i, \sigmav^i_c, \tau^i) = \\
+    \K[1](\p, \sigma_c, \tau) +
+    \sum_{i \in I} q_i \K[N](\p^i, \sigmav^i_c, \tauv^i) = \\
     = \lambda \K[1](\p_1, \sigma_1, \tau) +
     (1-\lambda) \K[1](\p_2, \sigma_2, \tau) + \\
     + \sum_{i \in I} q^i \left(
@@ -759,14 +763,14 @@ $\p \in P'(l,r)$ %
       \frac{(1-\lambda) q^i_2}{q^i} \K[N](\p^i_2, \sigmav^i_2, \tauv^i)
     \right) = \\
     = \lambda \K[N+1](\p_1, \sigmav_1, \tauv) +
-    (1-\lambda)\K[N+1](\p_1, \sigmav_2, \tauv).
+    (1-\lambda)\K[N+1](\p_2, \sigmav_2, \tauv).
   \end{gather*}
   Утверждение доказано.
   Из него следует
   \begin{multline*}
-    \Low[n](\p, \sigmav_c) = \inf_{\tauv \in \Tau} \K[n](\p, \sigmav_c, j) \geqslant
-    \lambda \min_{\tauv \in \Tau} \K[n](\p, \sigmav_1, j) + \\
-    + (1-\lambda) \min_{\tauv \in \Tau} \K[n](\p, \sigmav_2, j) =
+    \Low[n](\p, \sigmav_c) = \inf_{\tauv \in \Tau'} \K[n](\p, \sigmav_c, j) \geqslant
+    \lambda \min_{\tauv \in \Tau'} \K[n](\p, \sigmav_1, j) + \\
+    + (1-\lambda) \min_{\tauv \in \Tau'} \K[n](\p, \sigmav_2, j) =
     \lambda \Low[n](\p_1, \sigmav_1) + (1-\lambda) \Low[n](\p_2, \sigmav_2).
   \end{multline*}
 \end{proof}
@@ -865,13 +869,12 @@ $\p \in P'(l,r)$ %
   М.: ФИЗМАТЛИТ, 2004.
 
 \bibitem{bib:pyanykh14}%
-  {\MakeUppercase{Пьяных А.И.}} \textit{Об одной модификации модели биржевых торгов с инсайдером} // Математическая теория игр и ее приложения. -- 2014. -- Т. 6, №4. - С. 68--84.
+  {\MakeUppercase{Пьяных А.И.}} \textit{Об одной модификации модели биржевых торгов с инсайдером} // Математическая теория игр и ее приложения. -- 2014. -- Т. 6, №4. -- С. 68--84.
 
 \bibitem{bib:pyanykh16}%
   {\MakeUppercase{Пьяных А.И.}} \textit{Многошаговая модель биржевых торгов с
     асимметричной информацией и элементами переговоров} // %
-  Вестн. Моск. ун-та. Сер.15. Вычисл. матем. и киберн. -- 2016. -- №1. -- С.
-  34—-40.
+  Вестн. Моск. ун-та. Сер.15. Вычисл. матем. и киберн. -- 2016. -- №1. -- С. 34--40.
 
 \bibitem{bib:sandomirskaya12}%
   {\MakeUppercase{Сандомирская М.С., Доманский В.К.}} \textit{Решение
